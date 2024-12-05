@@ -10,5 +10,5 @@ headers = {"Authorization": "token {}".format(token)}
 data = {"name": "{}".format(reponame)}
 
 username = input("Please enter your GitHub username: ")
-r = requests.delete("https://api.github.com/repos/{}/{}".format(username, reponame), headers=headers)
+r = requests.delete("https://api.github.com/repos/{}/{}".format(username, reponame), headers=headers, timeout=60)
 print(r)

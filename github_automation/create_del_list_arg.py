@@ -32,16 +32,16 @@ headers = {"Authorization": "token {}".format(token)}
 data = {"name": "{}".format(reponame)}
 
 if reponame:
-    r = requests.post(GITHUB_API_URL +"user/repos" + "", data=json.dumps(data), headers=headers)
+    r = requests.post(GITHUB_API_URL +"user/repos" + "", data=json.dumps(data), headers=headers, timeout=60)
 
 if deleterepo:
     username = input("Please enter your GitHub username: ")
-    r = requests.delete("https://api.github.com/repos/{}/{}".format(username,deleterepo), headers=headers)
+    r = requests.delete("https://api.github.com/repos/{}/{}".format(username,deleterepo), headers=headers, timeout=60)
     print(r)
 
 if listrepo:
     username = input("Please enter your GitHub username: ")
-    output = requests.get("https://api.github.com/users/{}/repos".format(username))
+    output = requests.get("https://api.github.com/users/{}/repos".format(username), timeout=60)
     output = json.loads(output.text)
     for repo in output:
         pprint(repo["name"])
