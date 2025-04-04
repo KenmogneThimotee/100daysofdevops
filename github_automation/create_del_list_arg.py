@@ -3,6 +3,7 @@ from pprint import pprint
 import os
 import json
 import argparse
+from security import safe_requests
 
 
 VALID_TYPES = ['all', 'owner', 'public', 'private', 'member']
@@ -41,7 +42,7 @@ if deleterepo:
 
 if listrepo:
     username = input("Please enter your GitHub username: ")
-    output = requests.get("https://api.github.com/users/{}/repos".format(username))
+    output = safe_requests.get("https://api.github.com/users/{}/repos".format(username))
     output = json.loads(output.text)
     for repo in output:
         pprint(repo["name"])
