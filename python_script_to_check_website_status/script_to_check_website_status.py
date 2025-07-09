@@ -1,7 +1,7 @@
-import requests
 import bs4
 import smtplib
 import os
+from security import safe_requests
 
 email_add = os.environ.get('EMAIL_ADD')
 password = os.environ.get('EMAIL_PASS')
@@ -19,7 +19,7 @@ def send_email():
 
 producturl="http://100daysofdevops.com/contact-us/"
 
-res = requests.get(producturl, timeout=5)
+res = safe_requests.get(producturl, timeout=5)
 if res.status_code != 200:
     send_email()
 
